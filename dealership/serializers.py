@@ -16,10 +16,7 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class VehicleSerializer(serializers.ModelSerializer):
-    brand_name = serializers.CharField(
-        source="brand.name",
-        read_only=True
-    )
+    brand = BrandSerializer(read_only=True)
 
     class Meta:
         model = Vehicle
@@ -31,16 +28,44 @@ class VehicleImageSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class ReservationSerializer(serializers.ModelSerializer):
+    vehicle_name = serializers.CharField(
+        source="vehicle.model",
+        read_only=True
+    )
+
+    brand = serializers.CharField(
+        source="vehicle.brand.name",
+        read_only=True
+    )
+
+    customer = serializers.PrimaryKeyRelatedField(
+        read_only=True
+    )
+
     class Meta:
         model = Reservation
         fields = "__all__"
 
 class InquirySerializer(serializers.ModelSerializer):
+
+    customer = serializers.PrimaryKeyRelatedField(
+        read_only=True
+    )
+
     class Meta:
         model = Inquiry
         fields = "__all__"
 
 class PaymentSerializer(serializers.ModelSerializer):
+    reservation_vehicle = serializers.CharField(
+        source="reservation.vehicle.model",
+        read_only=True
+    )
+
+    customer = serializers.PrimaryKeyRelatedField(
+        read_only=True
+    )
+
     class Meta:
         model = Payment
         fields = "__all__"
