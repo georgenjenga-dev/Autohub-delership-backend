@@ -149,12 +149,16 @@ class InquiryViewSet(viewsets.ModelViewSet):
     serializer_class = InquirySerializer
     permission_classes = [IsAuthenticated]
 
+
+    def perform_create(self, serializer):
+        serializer.save(customer=self.request.user)
+
+
     @action(detail=False, methods=["get"])
     def my_inquiries(self, request):
         inquiries = Inquiry.objects.filter(customer=request.user)
         serializer = self.get_serializer(inquiries, many=True)
         return Response(serializer.data)
-
 
 # ===========================
 # PAYMENTS

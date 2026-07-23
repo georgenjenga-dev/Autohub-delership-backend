@@ -47,6 +47,11 @@ class ReservationSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class InquirySerializer(serializers.ModelSerializer):
+
+    customer = serializers.PrimaryKeyRelatedField(
+        read_only=True
+    )
+
     class Meta:
         model = Inquiry
         fields = "__all__"
