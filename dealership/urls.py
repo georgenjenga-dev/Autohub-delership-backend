@@ -1,9 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import RegisterView
-from .views import DashboardStats
 
 from .views import (
+    RegisterView,
+    DashboardStats,
+    CurrentUserView,
     BrandViewSet,
     VehicleViewSet,
     VehicleImageViewSet,
@@ -12,6 +13,7 @@ from .views import (
     PaymentViewSet,
     KanbanTaskViewSet,
 )
+
 
 router = DefaultRouter()
 
@@ -26,6 +28,6 @@ router.register(r'kanban', KanbanTaskViewSet)
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("", include(router.urls)),
-     path("", include(router.urls)),
     path("dashboard/", DashboardStats.as_view(), name="dashboard"),
+    path("me/", CurrentUserView.as_view(), name="current-user"),
 ]
