@@ -53,7 +53,6 @@ class CurrentUserView(APIView):
 # ===========================
 
 class DashboardStats(APIView):
-    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         data = {
@@ -66,8 +65,6 @@ class DashboardStats(APIView):
         }
 
         return Response(data)
-
-
 # ===========================
 # BRANDS
 # ===========================
