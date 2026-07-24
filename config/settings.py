@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-shp0_yx-(4al!6&4*c(bj61#5(&j__3f-4e8(syle)j4y%&47@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "autohub-delership-backend.vercel.app",
+]
 
 
 # Application definition
